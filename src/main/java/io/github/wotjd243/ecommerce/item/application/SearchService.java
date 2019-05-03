@@ -1,4 +1,4 @@
-package io.github.wotjd243.ecommerce.item.service;
+package io.github.wotjd243.ecommerce.item.application;
 
 import io.github.wotjd243.ecommerce.item.domain.search.*;
 import io.github.wotjd243.ecommerce.item.infra.ItemRepository;
