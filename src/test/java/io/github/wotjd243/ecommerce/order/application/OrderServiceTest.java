@@ -23,7 +23,7 @@ public class OrderServiceTest {
 
     @Test
     public void 한개_주문() {
-        Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
+        Buyer buyer = new Buyer(1L, TEST_USER_ID, TEST_USER_ADDRESS);
         PayMethod method = PayMethod.CARD;
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.findItems("DDD")));
 
@@ -36,7 +36,7 @@ public class OrderServiceTest {
 
     @Test
     public void 여러개_주문() {
-        Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
+        Buyer buyer = new Buyer(1L, TEST_USER_ID, TEST_USER_ADDRESS);
         PayMethod method = PayMethod.CARD;
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.findAll()));
 

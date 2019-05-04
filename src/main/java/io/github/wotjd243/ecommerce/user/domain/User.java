@@ -1,16 +1,22 @@
 package io.github.wotjd243.ecommerce.user.domain;
 
-import java.util.List;
+import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
+
+import java.util.UUID;
 
 public class User {
-    private final String id;
-    private List<String> orderList;
+    private Long id;
+    private final String userId;
+    private String Address;
 
-    public User(String id) {
-        this.id = id;
+    public User(String userId, String address) {
+        this.userId = userId;
+        this.Address = Address;
     }
 
-
+    public UserResponseDto toDto(){
+        return new UserResponseDto(userId);
+    }
 }
 /*
 - 사용자

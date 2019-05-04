@@ -21,15 +21,17 @@ public class ItemServiceTest {
 
     @Test
     public void 물품_전체_검색() {
-        List<Item> items = service.findAll();
+        List<ItemResponseDto> items = service.findAll();
         assertThat(items.size()).isNotNull();
     }
 
     @Test
     public void 키워드를_기준으로_검색한다() {
-        List<Item> items = service.findItems("DDD");
+        ItemRequestDto request = new ItemRequestDto("DDD란", 12.3, "http://www.naver.com");
+        ItemResponseDto response = service.register(request);
+        List<ItemResponseDto> items = service.findItems("DDD");
 
-        assertThat(items.get(0).isSamePrice(25.0)).isTrue();
+        assertThat(items).contains(response);
     }
 
     @Test

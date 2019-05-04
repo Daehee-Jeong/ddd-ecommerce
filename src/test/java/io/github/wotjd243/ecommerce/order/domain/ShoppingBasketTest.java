@@ -1,7 +1,7 @@
 package io.github.wotjd243.ecommerce.order.domain;
 
 import io.github.wotjd243.ecommerce.item.application.ItemService;
-import io.github.wotjd243.ecommerce.item.domain.Item;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.infra.DummyItemRepository;
 import io.github.wotjd243.ecommerce.utils.BasketUtils;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShoppingBasketTest {
     private ItemService service = new ItemService(new DummyItemRepository());
-    private List<Item> items = service.findAll();
+    private List<ItemResponseDto> items = service.findAll();
 
     @Test
     public void 장바구니에_담은_상품의_총_금액_계산() {

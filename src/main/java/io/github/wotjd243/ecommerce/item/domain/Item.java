@@ -6,18 +6,16 @@ import lombok.Getter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.UUID;
 
 @Getter
 public class Item {
-    private String id;
+    private Long id;
     private String title;
     private Dollar price;
     private URL galleryUrl;
     private SellingState sellingState;
 
     public Item(String title, Double price, String galleryUrl) {
-        this.id = UUID.randomUUID().toString();
         this.title = title;
         this.price = new Dollar(price);
         this.sellingState = SellingState.ACTIVE;
@@ -34,10 +32,6 @@ public class Item {
 
     public boolean match(QueryKeyword keywords) {
         return keywords.match(this.title);
-    }
-
-    public double price() {
-        return this.price.getPrice();
     }
 
     public ItemResponseDto toDto() {
