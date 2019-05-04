@@ -1,6 +1,6 @@
 package io.github.wotjd243.ecommerce.item.domain;
 
-import io.github.wotjd243.ecommerce.item.application.dto.ItemDto;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 
 import java.net.MalformedURLException;
@@ -36,8 +36,8 @@ public class Item {
         return this.price.getPrice();
     }
 
-    public ItemDto toDto() {
-        return new ItemDto(title, price.getPrice(), galleryUrl.toString());
+    public ItemResponseDto toDto() {
+        return new ItemResponseDto(title, price.getPrice(), galleryUrl.toString(), sellingState.value);
     }
 
     private void setGalleryUrl(String galleryUrl) {

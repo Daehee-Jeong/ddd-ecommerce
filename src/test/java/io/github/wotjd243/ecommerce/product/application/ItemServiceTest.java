@@ -1,7 +1,8 @@
 package io.github.wotjd243.ecommerce.product.application;
 
 import io.github.wotjd243.ecommerce.item.application.ItemService;
-import io.github.wotjd243.ecommerce.item.application.dto.ItemDto;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemRequestDto;
 import io.github.wotjd243.ecommerce.item.domain.Item;
 import io.github.wotjd243.ecommerce.item.domain.search.*;
 import io.github.wotjd243.ecommerce.item.infra.DummyItemRepository;
@@ -35,8 +36,8 @@ public class ItemServiceTest {
     @Test
     public void 물품을_등록한다() {
         int preSize = service.findAll().size();
-        ItemDto request = new ItemDto("DDD란", 12.3, "http://www.naver.com");
-        ItemDto response = service.register(request);
+        ItemRequestDto request = new ItemRequestDto("DDD란", 12.3, "http://www.naver.com");
+        ItemResponseDto response = service.register(request);
 
         assertThat(service.findAll().size()).isEqualTo(preSize + 1);
         assertThat(request.getTitle()).isEqualTo(response.getTitle());

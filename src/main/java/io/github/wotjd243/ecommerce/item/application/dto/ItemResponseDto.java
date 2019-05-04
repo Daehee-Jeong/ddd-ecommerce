@@ -5,8 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ItemDto {
+public class ItemResponseDto {
     private String title;
     private double price;
     private String url;
+    private String state;
 }

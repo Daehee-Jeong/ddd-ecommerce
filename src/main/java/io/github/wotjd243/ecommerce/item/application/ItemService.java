@@ -1,6 +1,7 @@
 package io.github.wotjd243.ecommerce.item.application;
 
-import io.github.wotjd243.ecommerce.item.application.dto.ItemDto;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemRequestDto;
 import io.github.wotjd243.ecommerce.item.domain.Item;
 import io.github.wotjd243.ecommerce.item.domain.ItemRepository;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
@@ -25,7 +26,7 @@ public class ItemService {
         return Collections.unmodifiableList(items);
     }
 
-    public ItemDto register(ItemDto dto) {
+    public ItemResponseDto register(ItemRequestDto dto) {
         return itemRepository.save(new Item(dto.getTitle(), dto.getPrice(), dto.getUrl())).toDto();
     }
 }
