@@ -1,5 +1,6 @@
 package io.github.wotjd243.ecommerce.product.domain;
 
+import io.github.wotjd243.ecommerce.item.domain.Item;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

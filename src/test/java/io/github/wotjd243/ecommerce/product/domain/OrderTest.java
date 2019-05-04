@@ -1,6 +1,7 @@
 package io.github.wotjd243.ecommerce.product.domain;
 
 
+import io.github.wotjd243.ecommerce.item.domain.Item;
 import io.github.wotjd243.ecommerce.order.application.OrderService;
 import io.github.wotjd243.ecommerce.order.domain.Order;
 import io.github.wotjd243.ecommerce.order.domain.Paymethod;

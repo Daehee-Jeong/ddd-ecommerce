@@ -1,12 +1,16 @@
-package io.github.wotjd243.support.ecommerce.product;
+package io.github.wotjd243.ecommerce.item.infra;
 
-import io.github.wotjd243.ecommerce.product.domain.Item;
+import io.github.wotjd243.ecommerce.item.domain.Item;
+import io.github.wotjd243.ecommerce.item.domain.ItemRepository;
+import io.github.wotjd243.ecommerce.item.domain.search.Page;
+import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
+import io.github.wotjd243.ecommerce.item.domain.search.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ItemRepository {
+public class DummyItemRepository implements ItemRepository {
 
     private static List<Item> items = new ArrayList<>();
 
@@ -24,7 +28,18 @@ public class ItemRepository {
         items.add(item4);
     }
 
-    public static List<Item> findByKeywords(String keywords) {
-        return items.stream().filter(item -> item.match(keywords)).collect(Collectors.toList());
+    @Override
+    public List<Item> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Item> findAll(Page page, Sort sort) {
+        return null;
+    }
+
+    @Override
+    public List<Item> findByQueryKeyword(QueryKeyword queryKeyword, Page page, Sort sort) {
+        return items.stream().filter(item -> item.match(queryKeyword)).collect(Collectors.toList());
     }
 }

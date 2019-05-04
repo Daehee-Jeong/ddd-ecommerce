@@ -1,9 +1,12 @@
-package io.github.wotjd243.ecommerce.product.domain;
+package io.github.wotjd243.ecommerce.item.domain;
+
+import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Item {
+    private Long id;
     private String title;
     private Dollar price;
     private URL galleryUrl;
@@ -12,9 +15,8 @@ public class Item {
     public Item(String title, Double price, String galleryUrl) {
         this.title = title;
         this.price = new Dollar(price);
-        setGalleryUrl(galleryUrl);
-
         this.sellingState = SellingState.ACTIVE;
+        setGalleryUrl(galleryUrl);
     }
 
     public boolean isActive() {
@@ -25,8 +27,8 @@ public class Item {
         return this.price.equals(price);
     }
 
-    public boolean match(String keywords) {
-        return title.contains(keywords);
+    public boolean match(QueryKeyword keywords) {
+        return keywords.match(this.title);
     }
 
     public double price() {
@@ -39,14 +41,6 @@ public class Item {
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException(e);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "title='" + title + '\'' +
-                ", price=" + price +
-                '}';
     }
 
     enum SellingState {

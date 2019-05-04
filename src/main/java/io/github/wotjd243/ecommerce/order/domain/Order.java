@@ -1,10 +1,8 @@
 package io.github.wotjd243.ecommerce.order.domain;
 
-import io.github.wotjd243.ecommerce.product.domain.Dollar;
-import io.github.wotjd243.ecommerce.product.domain.Item;
+import io.github.wotjd243.ecommerce.item.domain.Item;
 import io.github.wotjd243.ecommerce.user.domain.User;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

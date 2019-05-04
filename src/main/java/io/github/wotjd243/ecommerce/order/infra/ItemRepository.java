@@ -1,6 +1,6 @@
 package io.github.wotjd243.ecommerce.order.infra;
 
-import io.github.wotjd243.ecommerce.product.domain.Item;
+import io.github.wotjd243.ecommerce.item.domain.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class ItemRepository {
         items.add(item2);
     }
 
-    public static List<Item> findByKeywords(String keywords) {
-        return items.stream().filter(item -> item.match(keywords)).collect(Collectors.toList());
-    }
+//    public static List<Item> findByKeywords(String keywords) {
+//        return items.stream().filter(item -> item.match(keywords)).collect(Collectors.toList());
+//    }
 }
