@@ -11,7 +11,7 @@ public class Dollar {
         this.price = price;
     }
 
-    public double castToDouble() {
+    public double getPrice() {
         return this.price;
     }
 

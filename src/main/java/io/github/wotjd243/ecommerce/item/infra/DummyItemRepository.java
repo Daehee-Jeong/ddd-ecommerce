@@ -30,16 +30,29 @@ public class DummyItemRepository implements ItemRepository {
 
     @Override
     public List<Item> findAll() {
+        return items;
+    }
+
+    @Override
+    public List<Item> findByQueryKeyword(QueryKeyword queryKeyword) {
+        return items.stream()
+                .filter(item -> item.match(queryKeyword))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<List<Item>> findAll(Page page, Sort sort) {
         return null;
     }
 
     @Override
-    public List<Item> findAll(Page page, Sort sort) {
+    public List<List<Item>> findByQueryKeyword(QueryKeyword queryKeyword, Page page, Sort sort) {
         return null;
     }
 
     @Override
-    public List<Item> findByQueryKeyword(QueryKeyword queryKeyword, Page page, Sort sort) {
-        return items.stream().filter(item -> item.match(queryKeyword)).collect(Collectors.toList());
+    public Item save(Item item) {
+        items.add(item);
+        return item;
     }
 }

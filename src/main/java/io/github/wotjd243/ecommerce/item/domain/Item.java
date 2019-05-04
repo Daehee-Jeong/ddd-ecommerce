@@ -1,5 +1,6 @@
 package io.github.wotjd243.ecommerce.item.domain;
 
+import io.github.wotjd243.ecommerce.item.application.dto.ItemDto;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 
 import java.net.MalformedURLException;
@@ -32,7 +33,11 @@ public class Item {
     }
 
     public double price() {
-        return this.price.castToDouble();
+        return this.price.getPrice();
+    }
+
+    public ItemDto toDto() {
+        return new ItemDto(title, price.getPrice(), galleryUrl.toString());
     }
 
     private void setGalleryUrl(String galleryUrl) {
