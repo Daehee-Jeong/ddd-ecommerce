@@ -11,9 +11,9 @@ public class UserTest {
 //    @Test
 //    public void 판매자가_물품을_등록() {
 //        Item item = createItem(100.7);
-//        user.registerItems(product, item);
+//        user.registerItems(item, item);
 //
-//        List<Item> items = user.retrieve(product);
+//        List<Item> items = user.retrieve(item);
 //        assertThat(items.get(0)).isEqualTo(item);
 //    }
 //
@@ -21,9 +21,9 @@ public class UserTest {
 //    public void 판매자별로_물품의_가격을_다르게_설정() {
 //        double firstPrice = 100.8;
 //        double secondPrice = 25.8;
-//        user.registerItems(product, createItem(firstPrice));
-//        anotherSeller.registerItems(product, createItem(secondPrice));
-//        List<Item> items = product.getItems();
+//        user.registerItems(item, createItem(firstPrice));
+//        anotherSeller.registerItems(item, createItem(secondPrice));
+//        List<Item> items = item.getItems();
 //
 //        assertThat(items.get(0).isSamePrice(secondPrice)).isFalse();
 //    }

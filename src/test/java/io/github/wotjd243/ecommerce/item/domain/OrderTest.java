@@ -1,8 +1,6 @@
-package io.github.wotjd243.ecommerce.product.domain;
+package io.github.wotjd243.ecommerce.item.domain;
 
 
-import io.github.wotjd243.ecommerce.item.domain.Item;
-import io.github.wotjd243.ecommerce.order.application.OrderService;
 import io.github.wotjd243.ecommerce.order.domain.Buyer;
 import io.github.wotjd243.ecommerce.order.infra.ItemRepository;
 import org.junit.Test;
@@ -27,7 +25,7 @@ public class OrderTest {
     @Test
     public void 구매_생성() {
         ItemRepository itemRepository = new ItemRepository();
-        OrderService orderService = new OrderService(itemRepository);
+//        OrderService orderService = new OrderService(itemRepository);
 
 //        new Order(user, PayMethod.CARD, items);
     }

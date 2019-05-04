@@ -1,6 +1,5 @@
-package io.github.wotjd243.ecommerce.product.domain;
+package io.github.wotjd243.ecommerce.item.domain;
 
-import io.github.wotjd243.ecommerce.item.domain.Dollar;
 import org.junit.Test;
 
 public class DollarTest {

@@ -1,6 +1,5 @@
-package io.github.wotjd243.ecommerce.product.application;
+package io.github.wotjd243.ecommerce.item.application;
 
-import io.github.wotjd243.ecommerce.item.application.ItemService;
 import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.application.dto.ItemRequestDto;
 import io.github.wotjd243.ecommerce.item.domain.Item;

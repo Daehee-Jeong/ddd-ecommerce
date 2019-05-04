@@ -1,33 +1,45 @@
 package io.github.wotjd243.ecommerce.order.domain;
 
-import io.github.wotjd243.ecommerce.item.domain.Item;
+import io.github.wotjd243.ecommerce.order.application.dto.OrderDto;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Order {
     private String id;
-    private Date orderDate;
+    private LocalDateTime createdDate;
     private Buyer buyer;
     private PayMethod payMethod;
     private ShoppingBasket basket;
-    private double totalPrice;
 
     public Order(Buyer buyer, PayMethod payMethod, ShoppingBasket basket) {
         this.id = UUID.randomUUID().toString();
         this.buyer = buyer;
         this.payMethod = payMethod;
         this.basket = basket;
-//        computeTotalPrice(items);
     }
 
-    private void sumPrice(List<Item> items) {
-        for (Item item: items) {
-            this.totalPrice = Double.sum(item.price(), this.totalPrice);
-        }
+    public OrderDto toDto() {
+        return new OrderDto(
+                id,
+                buyer.getUserName(),
+                buyer.getUserAddress(),
+                basket.getItemsName(),
+                basket.sumPrice()
+        );
     }
 
+    public boolean isOwn(Buyer buyer) {
+        return this.buyer == buyer;
+    }
+
+    /*
+        private final String orderId;
+        private final String buyerName;
+        private final String buyerAddress;
+        private final List<String> orderedItem;
+        private final double totalPrice;
+     */
     public enum PayMethod {
         CARD,
         HP

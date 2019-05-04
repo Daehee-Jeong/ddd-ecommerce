@@ -20,4 +20,8 @@ public class ConsideringItem {
     public Double sum() {
         return this.price.getPrice() * quantity;
     }
+
+    public String getTitle() {
+        return title;
+    }
 }
