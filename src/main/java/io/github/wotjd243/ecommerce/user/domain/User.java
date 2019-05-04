@@ -2,8 +2,6 @@ package io.github.wotjd243.ecommerce.user.domain;
 
 import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
 
-import java.util.UUID;
-
 public class User {
     private Long id;
     private final String userId;
@@ -16,6 +14,14 @@ public class User {
 
     public UserResponseDto toDto(){
         return new UserResponseDto(userId);
+    }
+
+    public boolean isValid(String userId) {
+        return false;
+    }
+
+    public boolean match(String userId) {
+        return this.userId == userId;
     }
 }
 /*

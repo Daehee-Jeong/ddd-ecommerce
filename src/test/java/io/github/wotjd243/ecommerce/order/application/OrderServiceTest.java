@@ -7,6 +7,8 @@ import io.github.wotjd243.ecommerce.order.domain.Buyer;
 import io.github.wotjd243.ecommerce.order.domain.Order.PayMethod;
 import io.github.wotjd243.ecommerce.order.domain.ShoppingBasket;
 import io.github.wotjd243.ecommerce.order.infra.DummyOrderRepository;
+import io.github.wotjd243.ecommerce.user.application.UserService;
+import io.github.wotjd243.ecommerce.user.infra.DummyUserRepository;
 import io.github.wotjd243.ecommerce.utils.BasketUtils;
 import org.junit.Test;
 
@@ -19,7 +21,8 @@ public class OrderServiceTest {
     private final static String TEST_USER_ADDRESS = "서울시";
 
     private OrderService orderService = new OrderService(new DummyOrderRepository());
-    private ItemService itemService = new ItemService(new DummyItemRepository());
+    UserService userService = new UserService(new DummyUserRepository());
+    ItemService itemService = new ItemService(new DummyItemRepository(), userService);
 
     @Test
     public void 한개_주문() {

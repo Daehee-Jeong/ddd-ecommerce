@@ -5,6 +5,9 @@ import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
 import io.github.wotjd243.ecommerce.user.domain.User;
 import io.github.wotjd243.ecommerce.user.domain.UserRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserService {
     private final UserRepository userRepository;
 
@@ -21,7 +24,11 @@ public class UserService {
         return userRepository.save(user).toDto();
     }
 
-    private boolean isExists(String userId) {
+    public boolean isExists(String userId) {
         return userRepository.findByUserId(userId).isPresent();
+    }
+
+    public List<UserResponseDto> findAll() {
+        return userRepository.findAll().stream().map(v -> v.toDto()).collect(Collectors.toList());
     }
 }
