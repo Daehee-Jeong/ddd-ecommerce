@@ -3,22 +3,19 @@ package io.github.wotjd243.ecommerce.product.domain;
 
 import io.github.wotjd243.ecommerce.item.domain.Item;
 import io.github.wotjd243.ecommerce.order.application.OrderService;
-import io.github.wotjd243.ecommerce.order.domain.Order;
-import io.github.wotjd243.ecommerce.order.domain.Paymethod;
+import io.github.wotjd243.ecommerce.order.domain.Buyer;
 import io.github.wotjd243.ecommerce.order.infra.ItemRepository;
-import io.github.wotjd243.ecommerce.user.domain.User;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class OrderTest {
     private final static String TEST_USER_ID = "TEST_USER";
+    private final static String TEST_USER_ADDRESS = "서울시";
     private static List<Item> items = new ArrayList<>();
 
-    User user = new User(TEST_USER_ID);
+    Buyer user = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
     static {
         Item item1 = new Item("DDD Start", 25.00, "http://thumbs1.ebaystatic.com/m/m80hGwQEYVi2QUduAtjeVhw/140.jpg");
         items.add(item1);
@@ -32,7 +29,7 @@ public class OrderTest {
         ItemRepository itemRepository = new ItemRepository();
         OrderService orderService = new OrderService(itemRepository);
 
-        new Order("1", user, Paymethod.CARD, items);
+//        new Order(user, PayMethod.CARD, items);
     }
 
     @Test void 결제_총합() {

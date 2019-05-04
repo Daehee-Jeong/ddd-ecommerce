@@ -2,18 +2,22 @@ package io.github.wotjd243.ecommerce.item.domain;
 
 import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
+import lombok.Getter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.UUID;
 
+@Getter
 public class Item {
-    private Long id;
+    private String id;
     private String title;
     private Dollar price;
     private URL galleryUrl;
     private SellingState sellingState;
 
     public Item(String title, Double price, String galleryUrl) {
+        this.id = UUID.randomUUID().toString();
         this.title = title;
         this.price = new Dollar(price);
         this.sellingState = SellingState.ACTIVE;
