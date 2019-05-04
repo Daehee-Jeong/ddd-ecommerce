@@ -18,6 +18,11 @@ public class DummyOrderRepository implements OrderRepository {
     }
 
     @Override
+    public Order findById(String orderId) {
+        return orders.stream().filter(v -> v.match(orderId)).findFirst().get();
+    }
+
+    @Override
     public List<Order> findByBuyer(Buyer buyer) {
         return orders.stream().filter(v -> v.isOwn(buyer)).collect(Collectors.toList());
     }

@@ -19,18 +19,31 @@ public class OrderServiceTest {
     private final static String TEST_USER_ADDRESS = "서울시";
 
     private OrderService orderService = new OrderService(new DummyOrderRepository());
-    private ItemService service = new ItemService(new DummyItemRepository());
+    private ItemService itemService = new ItemService(new DummyItemRepository());
 
     @Test
-    public void 주문() {
+    public void 한개_주문() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         PayMethod method = PayMethod.CARD;
-        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(service.findAll()));
+        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.findItems("DDD")));
+
+        OrderDto result = orderService.order(buyer, method, basket);
+        assertThat(basket.size()).isEqualTo(1);
+
+        OrderDto order = orderService.findOrder(result.getOrderId());
+        assertThat(order).isEqualTo(result);
+    }
+
+    @Test
+    public void 여러개_주문() {
+        Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
+        PayMethod method = PayMethod.CARD;
+        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.findAll()));
 
         OrderDto result = orderService.order(buyer, method, basket);
         List<OrderDto> orders = orderService.findOrders(buyer);
 
-        assertThat(orders.size()).isEqualTo(1);
+        assertThat(basket.size()).isEqualTo(4);
         assertThat(orders).contains(result);
     }
 }

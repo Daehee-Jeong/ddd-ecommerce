@@ -33,13 +33,10 @@ public class Order {
         return this.buyer == buyer;
     }
 
-    /*
-        private final String orderId;
-        private final String buyerName;
-        private final String buyerAddress;
-        private final List<String> orderedItem;
-        private final double totalPrice;
-     */
+    public boolean match(String orderId) {
+        return this.id == orderId;
+    }
+
     public enum PayMethod {
         CARD,
         HP

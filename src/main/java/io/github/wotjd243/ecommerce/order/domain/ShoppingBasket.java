@@ -22,4 +22,8 @@ public class ShoppingBasket {
     public List<String> getItemsName() {
         return items.stream().map(v -> v.getTitle()).collect(Collectors.toList());
     }
+
+    public int size() {
+        return items.size();
+    }
 }

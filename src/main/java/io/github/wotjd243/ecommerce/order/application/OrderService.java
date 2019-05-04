@@ -26,4 +26,8 @@ public class OrderService {
         List<Order> orders = orderRepository.findByBuyer(buyer);
         return orders.stream().map(v -> v.toDto()).collect(Collectors.toList());
     }
+
+    public OrderDto findOrder(String orderId) {
+        return orderRepository.findById(orderId).toDto();
+    }
 }
