@@ -6,11 +6,16 @@ import io.github.wotjd243.ecommerce.product.domain.Product;
 import java.util.List;
 
 public class User {
-    private String id;
-    private List<ShippingAddress> shippingAddressList;
 
-    public User(String id) {
+    private String id;
+
+    private String address;
+
+    private ShippingAddresses shippingAddresses;
+
+    public User(String id, String address) {
         this.id = id;
+        this.address = address;
     }
 
     public void registerGoods(Product product, Item item) {
@@ -20,10 +25,4 @@ public class User {
     public List<Item> retrieve(Product product) {
         return product.getItems();
     }
-
-    public void makeOrder() {}
-
-    public void addShippingAddress(ShippingAddress shippingAddress) { shippingAddressList.add(shippingAddress); }
-
-    public void removeShippingAddress(ShippingAddress shippingAddress) { shippingAddressList.remove(shippingAddress); }
 }

@@ -6,18 +6,13 @@ import io.github.wotjd243.ecommerce.user.infra.ShippingAddressRepository;
 
 public class UserService {
 
-    private ShippingAddressRepository shippingAddressRepository;
+    private ShippingAddressService shippingAddressService;
 
-    public UserService(ShippingAddressRepository shippingAddressRepository) {
-        this.shippingAddressRepository = shippingAddressRepository;
+    public UserService(ShippingAddressService shippingAddressService) {
+        this.shippingAddressService = shippingAddressService;
     }
 
-    public void addShippingAddress(ShippingAddressDto shippingAddressDto) {
-        ShippingAddress shippingAddress = new ShippingAddress(shippingAddressDto.getAddress(), shippingAddressDto.getZipcode());
-        shippingAddressRepository.save(shippingAddress);
-    }
-
-    private boolean isShippingAddressExist(String userId, ShippingAddress shippingAddress) {
-        return shippingAddressRepository.findAllByUserId(userId).contains(shippingAddress);
+    public ShippingAddress addShippingAddress(ShippingAddressDto shippingAddressDto) {
+        return shippingAddressService.addShippingAddress(shippingAddressDto);
     }
 }

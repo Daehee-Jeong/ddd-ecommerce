@@ -1,10 +1,19 @@
 package io.github.wotjd243.ecommerce.user.application.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter @Setter
 public class ShippingAddressDto {
-    private String address;
-    private String zipcode;
+    private final String address;
+    private final String zipCode;
+
+    public ShippingAddressDto(String address, String zipCode) {
+        this.address = address;
+        this.zipCode = zipCode;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
 }
