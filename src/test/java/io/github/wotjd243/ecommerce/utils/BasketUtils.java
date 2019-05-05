@@ -20,7 +20,7 @@ public class BasketUtils {
 
     private static URL generateUrl(ItemResponseDto v) {
         try {
-            return new URL(v.getGalleryUrl());
+            return new URL(v.getUrl());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

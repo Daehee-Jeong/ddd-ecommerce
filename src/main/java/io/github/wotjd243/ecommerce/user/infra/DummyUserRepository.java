@@ -1,6 +1,5 @@
 package io.github.wotjd243.ecommerce.user.infra;
 
-import io.github.wotjd243.ecommerce.user.application.dto.UserDto;
 import io.github.wotjd243.ecommerce.user.domain.User;
 import io.github.wotjd243.ecommerce.user.domain.UserRepository;
 

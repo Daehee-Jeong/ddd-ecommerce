@@ -2,9 +2,7 @@ package io.github.wotjd243.ecommerce.item.domain;
 
 import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
-import lombok.Getter;
 
-@Getter
 public class Item {
     private Long id = 1L;
     private String sellerId;
@@ -33,15 +31,22 @@ public class Item {
         return new ItemResponseDto(detail.getTitle(), detail.getPrice(), detail.getGalleryUrl(), sellingState.value);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getTitle() {
         return detail.getTitle();
+    }
+
+    public String getSellerId() {
+        return sellerId;
     }
 
     public boolean checkOwner(String sellerId) {
         return this.sellerId == sellerId;
     }
 
-    @Getter
     public enum SellingState {
         ACTIVE("Active"),
         CANCELED("Canceled"),
@@ -57,6 +62,10 @@ public class Item {
 
         public boolean isActive() {
             return (this == ACTIVE);
+        }
+
+        public String getValue() {
+            return value;
         }
     }
 }

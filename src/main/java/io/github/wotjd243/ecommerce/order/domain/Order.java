@@ -23,7 +23,7 @@ public class Order {
         return new OrderResponseDto(
                 id,
                 buyer.getUserId(),
-                buyer.getUserAddress(),
+                buyer.getAddress(),
                 basket.getItemsName(),
                 basket.sumPrice()
         );
