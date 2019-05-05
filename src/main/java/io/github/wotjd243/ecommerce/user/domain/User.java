@@ -5,10 +5,11 @@ import io.github.wotjd243.ecommerce.product.domain.Product;
 
 import java.util.List;
 
-public class Seller {
+public class User {
     private String id;
+    private List<ShippingAddress> shippingAddressList;
 
-    public Seller(String id) {
+    public User(String id) {
         this.id = id;
     }
 
@@ -19,4 +20,10 @@ public class Seller {
     public List<Item> retrieve(Product product) {
         return product.getItems();
     }
+
+    public void makeOrder() {}
+
+    public void addShippingAddress(ShippingAddress shippingAddress) { shippingAddressList.add(shippingAddress); }
+
+    public void removeShippingAddress(ShippingAddress shippingAddress) { shippingAddressList.remove(shippingAddress); }
 }
