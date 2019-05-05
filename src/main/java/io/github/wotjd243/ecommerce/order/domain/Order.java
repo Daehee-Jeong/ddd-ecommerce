@@ -1,6 +1,6 @@
 package io.github.wotjd243.ecommerce.order.domain;
 
-import io.github.wotjd243.ecommerce.order.application.dto.OrderDto;
+import io.github.wotjd243.ecommerce.order.application.dto.OrderResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -19,10 +19,10 @@ public class Order {
         this.basket = basket;
     }
 
-    public OrderDto toDto() {
-        return new OrderDto(
+    public OrderResponseDto toDto() {
+        return new OrderResponseDto(
                 id,
-                buyer.getUserName(),
+                buyer.getUserId(),
                 buyer.getUserAddress(),
                 basket.getItemsName(),
                 basket.sumPrice()
@@ -39,6 +39,6 @@ public class Order {
 
     public enum PayMethod {
         CARD,
-        HP
+        PHONE
     }
 }

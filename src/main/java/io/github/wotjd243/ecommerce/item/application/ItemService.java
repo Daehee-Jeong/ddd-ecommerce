@@ -8,7 +8,6 @@ import io.github.wotjd243.ecommerce.item.domain.ItemRepository;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 import io.github.wotjd243.ecommerce.user.application.UserService;
 import io.github.wotjd243.ecommerce.user.application.dto.UserDto;
-import io.github.wotjd243.ecommerce.user.domain.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,22 +32,16 @@ public class ItemService {
     }
 
     public ItemResponseDto register(UserDto userDto, ItemRequestDto itemDto) {
-        isValid(userDto);
+        userService.checkValid(userDto.getUserId());
 
         ItemDetail detail = new ItemDetail(itemDto.getTitle(), itemDto.getPrice(), itemDto.getUrl());
         return itemRepository.save(new Item(userDto.getUserId(), detail)).toDto();
     }
 
     public List<String> findItemsOwned(UserDto userDto) {
-        isValid(userDto);
+        userService.checkValid(userDto.getUserId());
 
         List<Item> items = itemRepository.findByUserId(userDto.getUserId());
         return items.stream().map(v -> v.getTitle()).collect(Collectors.toList());
-    }
-
-    private void isValid(UserDto userDto) {
-        if (userService.isExists(userDto.getUserId())) {
-            throw new ResourceNotFoundException("현재 접속한 계정은 유효하지 않습니다.");
-        }
     }
 }

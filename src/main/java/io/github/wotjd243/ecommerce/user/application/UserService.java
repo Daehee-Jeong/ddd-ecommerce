@@ -4,6 +4,7 @@ import io.github.wotjd243.ecommerce.user.application.dto.UserRequestDto;
 import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
 import io.github.wotjd243.ecommerce.user.domain.User;
 import io.github.wotjd243.ecommerce.user.domain.UserRepository;
+import io.github.wotjd243.ecommerce.user.domain.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,12 @@ public class UserService {
 
     public boolean isExists(String userId) {
         return userRepository.findByUserId(userId).isPresent();
+    }
+
+    public void checkValid(String userId) {
+        if (!isExists(userId)) {
+            throw new ResourceNotFoundException("현재 접속한 계정은 유효하지 않습니다.");
+        }
     }
 
     public List<UserResponseDto> findAll() {

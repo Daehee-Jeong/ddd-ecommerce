@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode
-public class OrderDto {
+public class OrderResponseDto {
     private final String orderId;
     private final String buyerName;
     private final String buyerAddress;
