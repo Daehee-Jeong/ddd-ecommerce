@@ -14,8 +14,4 @@ public class Dollar {
     public double getPrice() {
         return this.price;
     }
-
-    public boolean equals(double price) {
-        return Double.compare(price, this.price) == 0;
-    }
 }

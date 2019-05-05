@@ -16,4 +16,6 @@ public interface ItemRepository {
     List<List<Item>> findByQueryKeyword(QueryKeyword queryKeyword, Page page, Sort sort);
 
     Item save(Item item);
+
+    List<Item> findByUserId(String userId);
 }

@@ -4,46 +4,33 @@ import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 import lombok.Getter;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 @Getter
 public class Item {
     private Long id;
-    private String title;
-    private Dollar price;
-    private URL galleryUrl;
+    private String userId;
+    private ItemDetail detail;
     private SellingState sellingState;
 
-    public Item(String title, Double price, String galleryUrl) {
-        this.title = title;
-        this.price = new Dollar(price);
+    public Item(String userId, ItemDetail itemDetail) {
+        this.userId = userId;
+        this.detail = itemDetail;
         this.sellingState = SellingState.ACTIVE;
-        setGalleryUrl(galleryUrl);
     }
 
     public boolean isActive() {
         return sellingState.isActive();
     }
 
-    public boolean isSamePrice(double price) {
-        return this.price.equals(price);
-    }
-
-    public boolean match(QueryKeyword keywords) {
-        return keywords.match(this.title);
+    public boolean contains(QueryKeyword keywords) {
+        return this.detail.contains(keywords);
     }
 
     public ItemResponseDto toDto() {
-        return new ItemResponseDto(title, price.getPrice(), galleryUrl.toString(), sellingState.value);
+        return new ItemResponseDto(detail.getTitle(), detail.getPrice(), detail.getGalleryUrl(), sellingState.value);
     }
 
-    private void setGalleryUrl(String galleryUrl) {
-        try {
-            this.galleryUrl = new URL(galleryUrl);
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(e);
-        }
+    public String getTitle() {
+        return detail.getTitle();
     }
 
     enum SellingState {

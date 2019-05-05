@@ -28,7 +28,7 @@ public class OrderServiceTest {
     public void 한개_주문() {
         Buyer buyer = new Buyer(1L, TEST_USER_ID, TEST_USER_ADDRESS);
         PayMethod method = PayMethod.CARD;
-        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.findItems("DDD")));
+        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchItems("DDD")));
 
         OrderDto result = orderService.order(buyer, method, basket);
         assertThat(basket.size()).isEqualTo(1);
@@ -41,7 +41,7 @@ public class OrderServiceTest {
     public void 여러개_주문() {
         Buyer buyer = new Buyer(1L, TEST_USER_ID, TEST_USER_ADDRESS);
         PayMethod method = PayMethod.CARD;
-        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.findAll()));
+        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
 
         OrderDto result = orderService.order(buyer, method, basket);
         List<OrderDto> orders = orderService.findOrders(buyer);

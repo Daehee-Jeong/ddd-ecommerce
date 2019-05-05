@@ -16,10 +16,6 @@ public class User {
         return new UserResponseDto(userId);
     }
 
-    public boolean isValid(String userId) {
-        return false;
-    }
-
     public boolean match(String userId) {
         return this.userId == userId;
     }

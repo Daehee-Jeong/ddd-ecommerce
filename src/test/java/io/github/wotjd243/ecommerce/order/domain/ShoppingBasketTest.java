@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ShoppingBasketTest {
     UserService userService = new UserService(new DummyUserRepository());
     ItemService itemService = new ItemService(new DummyItemRepository(), userService);
-    private List<ItemResponseDto> items = itemService.findAll();
+    private List<ItemResponseDto> items = itemService.searchAll();
 
     @Test
     public void 장바구니에_담은_상품의_총_금액_계산() {
