@@ -20,6 +20,8 @@ public class OrderService {
         this.userService = userService;
     }
 
+    //TODO: 장바구니에 담기 기능이 구현되어야 한다.
+
     public OrderResponseDto order(Buyer buyer, PayMethod method, ShoppingBasket basket) {
         userService.checkValid(buyer.getUserId());
 

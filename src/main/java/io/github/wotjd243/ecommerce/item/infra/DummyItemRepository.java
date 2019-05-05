@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DummyItemRepository implements ItemRepository {
-    private static String user = DummyUserRepository.getTestUser().getUserId();
+    private static String user = DummyUserRepository.getTestUserId();
     private static List<Item> items = new ArrayList<>();
 
     static {
@@ -65,7 +65,12 @@ public class DummyItemRepository implements ItemRepository {
     @Override
     public List<Item> findByUserId(String userId) {
         return items.stream()
-                .filter(v -> v.getUserId() == userId)
+                .filter(v -> v.getSellerId() == userId)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Item findById(Long itemId) {
+        return items.stream().filter(v -> v.getId() == itemId).findFirst().get();
     }
 }

@@ -10,7 +10,7 @@ public class ItemTest {
         Item item = createItem(25.75);
 
         assertThat(item).isNotNull();
-        assertThat(item.isActive()).isTrue();
+        assertThat(item.isActive()).isFalse();
     }
 
     public static Item createItem(double price) {

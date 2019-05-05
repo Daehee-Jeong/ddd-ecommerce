@@ -19,8 +19,8 @@ public class DummyUserRepository implements UserRepository {
         users.add(user);
     }
 
-    public static UserDto getTestUser() {
-        return new UserDto(TEST_USER_ID);
+    public static String getTestUserId() {
+        return TEST_USER_ID;
     }
 
     @Override

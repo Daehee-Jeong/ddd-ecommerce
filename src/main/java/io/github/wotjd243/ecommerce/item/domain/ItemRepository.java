@@ -18,4 +18,6 @@ public interface ItemRepository {
     Item save(Item item);
 
     List<Item> findByUserId(String userId);
+
+    Item findById(Long itemId);
 }

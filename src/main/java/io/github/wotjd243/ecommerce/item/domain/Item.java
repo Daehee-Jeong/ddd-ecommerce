@@ -6,14 +6,18 @@ import lombok.Getter;
 
 @Getter
 public class Item {
-    private Long id;
-    private String userId;
+    private Long id = 1L;
+    private String sellerId;
     private ItemDetail detail;
     private SellingState sellingState;
 
-    public Item(String userId, ItemDetail itemDetail) {
-        this.userId = userId;
+    public Item(String sellerId, ItemDetail itemDetail) {
+        this.sellerId = sellerId;
         this.detail = itemDetail;
+        this.sellingState = SellingState.CANCELED;
+    }
+
+    public void activate() {
         this.sellingState = SellingState.ACTIVE;
     }
 
@@ -33,7 +37,12 @@ public class Item {
         return detail.getTitle();
     }
 
-    enum SellingState {
+    public boolean checkOwner(String sellerId) {
+        return this.sellerId == sellerId;
+    }
+
+    @Getter
+    public enum SellingState {
         ACTIVE("Active"),
         CANCELED("Canceled"),
         ENDED("Ended"),
@@ -46,7 +55,7 @@ public class Item {
             this.value = value;
         }
 
-        private boolean isActive() {
+        public boolean isActive() {
             return (this == ACTIVE);
         }
     }
