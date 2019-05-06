@@ -10,10 +10,11 @@ public class ShippingAddress {
     private String address;
     private ZipCode zipcode;
 
-    public ShippingAddress(String address, ZipCode zipcode) {
-        if (StringUtils.isBlank(address)) {
+    public ShippingAddress(String userId, String address, ZipCode zipcode) {
+        if (StringUtils.isBlank(address) || StringUtils.isBlank(userId)) {
             throw new IllegalArgumentException();
         }
+        this.userId = userId;
         this.address = address;
         this.zipcode = zipcode;
     }

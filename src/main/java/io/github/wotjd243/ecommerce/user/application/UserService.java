@@ -2,7 +2,6 @@ package io.github.wotjd243.ecommerce.user.application;
 
 import io.github.wotjd243.ecommerce.user.application.dto.ShippingAddressDto;
 import io.github.wotjd243.ecommerce.user.domain.ShippingAddress;
-import io.github.wotjd243.ecommerce.user.infra.ShippingAddressRepository;
 
 public class UserService {
 
@@ -12,7 +11,7 @@ public class UserService {
         this.shippingAddressService = shippingAddressService;
     }
 
-    public ShippingAddress addShippingAddress(ShippingAddressDto shippingAddressDto) {
-        return shippingAddressService.addShippingAddress(shippingAddressDto);
+    public ShippingAddress addShippingAddress(String userId, ShippingAddressDto shippingAddressDto) {
+        return shippingAddressService.addShippingAddress(userId, shippingAddressDto);
     }
 }

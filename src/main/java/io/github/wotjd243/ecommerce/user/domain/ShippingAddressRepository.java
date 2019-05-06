@@ -1,4 +1,4 @@
-package io.github.wotjd243.ecommerce.user.infra;
+package io.github.wotjd243.ecommerce.user.domain;
 
 import io.github.wotjd243.ecommerce.user.domain.ShippingAddress;
 
