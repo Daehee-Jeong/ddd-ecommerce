@@ -10,15 +10,13 @@ import java.util.List;
 
 public class ShoppingBasketService {
     private ShoppingBasketRepository shoppingBasketRepository;
-    private ShoppingBasketService shoppingBasketService;
 
     public ShoppingBasketService(ShoppingBasketRepository shoppingBasketRepository, ShoppingBasketService shoppingBasketService) {
         this.shoppingBasketRepository = shoppingBasketRepository;
-        this.shoppingBasketService = shoppingBasketService;
     }
 
     public ShoppingBasket saveShoppingBasket(Buyer buyer, ShoppingBasketDto shoppingBasketDto) {
-        ShoppingBasket shoppingBasket = new ShoppingBasket(buyer, shoppingBasketDto.getConsideringItems());
+        ShoppingBasket shoppingBasket = new ShoppingBasket(shoppingBasketDto.getConsideringItems());
         return shoppingBasketRepository.save(shoppingBasket);
     }
 
