@@ -57,7 +57,7 @@ public class OrderServiceTest {
     public void 결제성공플레그_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(basket);
+        PayInfo payInfo = new PayInfo(buyer, basket);
 
         assertThat(payInfo.getResult()).isEqualTo(SUCCESS);
     }
@@ -66,7 +66,7 @@ public class OrderServiceTest {
     public void 결제금액변조_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(basket);
+        PayInfo payInfo = new PayInfo(buyer, basket);
 
         assertThat(payInfo.getPayTotal()).isEqualTo(basket.sumPrice());
     }
