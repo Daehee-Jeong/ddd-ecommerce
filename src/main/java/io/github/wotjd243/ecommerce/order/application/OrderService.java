@@ -25,7 +25,7 @@ public class OrderService {
         userService.checkValid(buyer.getUserId());
 
         //TODO: 주문이 완료되기 전에 결재가 진행되어야 한다.
-        PayInfo payInfo = new PayInfo(basket);
+        PayInfo payInfo = new PayInfo(buyer, basket);
 
         if (isPaySuccess(payInfo, basket)) {
             Order order = new Order(buyer, method, basket);
@@ -48,10 +48,6 @@ public class OrderService {
     public List<OrderResponseDto> findOrders(Buyer buyer) {
         List<Order> orders = orderRepository.findByBuyer(buyer);
         return orders.stream().map(v -> v.toDto()).collect(Collectors.toList());
-    }
-
-    public void callPgService() {
-        isPaid = true;
     }
 
     public OrderResponseDto findOrder(String orderId) {

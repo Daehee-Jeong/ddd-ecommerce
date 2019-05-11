@@ -6,7 +6,8 @@ public class PayInfo {
     private PayState payState;
     private double sumPrice;
 
-    public PayInfo(ShoppingBasket basket) {
+    public PayInfo(Buyer buyer, ShoppingBasket basket) {
+        this.buyer = buyer;
         this.basket = basket;
         this.sumPrice = basket.sumPrice();
     }
