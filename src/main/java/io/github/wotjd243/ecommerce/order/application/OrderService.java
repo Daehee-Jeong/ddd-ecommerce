@@ -21,7 +21,7 @@ public class OrderService {
 
     //TODO: 장바구니에 담기 기능이 구현되어야 한다.
 
-    public OrderResponseDto order(Buyer buyer, PayMethod method, ShoppingBasket basket) {
+    public void order(Buyer buyer, PayMethod method, ShoppingBasket basket) {
         userService.checkValid(buyer.getUserId());
 
         //TODO: 주문이 완료되기 전에 결재가 진행되어야 한다.
@@ -42,6 +42,7 @@ public class OrderService {
             throw new IllegalStateException("결제도중 오류가 발생했습니다");
         }
         return payInfo.getResult().equals("SUCCESS") && payInfo.getPayTotal() == shoppingBasket.sumPrice();
+
     }
 
 

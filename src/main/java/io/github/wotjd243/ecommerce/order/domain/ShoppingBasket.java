@@ -12,8 +12,9 @@ public class ShoppingBasket {
     private LocalDateTime createdDate;
     private Buyer buyer;
 
-    public ShoppingBasket(List<ConsideringItem> items) {
+    public ShoppingBasket(Buyer buyer, List<ConsideringItem> items) {
         this.id = UUID.randomUUID().toString();
+        this.buyer = buyer;
         this.items = items;
     }
 
