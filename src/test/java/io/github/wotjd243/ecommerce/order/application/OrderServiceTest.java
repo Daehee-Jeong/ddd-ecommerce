@@ -1,13 +1,12 @@
 package io.github.wotjd243.ecommerce.order.application;
 
 import io.github.wotjd243.ecommerce.item.application.ItemService;
+import io.github.wotjd243.ecommerce.item.application.dto.PagingDto;
+import io.github.wotjd243.ecommerce.item.domain.search.SortOrder;
+import io.github.wotjd243.ecommerce.item.domain.search.SortParameter;
 import io.github.wotjd243.ecommerce.item.infra.DummyItemRepository;
 import io.github.wotjd243.ecommerce.order.application.dto.OrderResponseDto;
-import io.github.wotjd243.ecommerce.order.domain.Buyer;
-import io.github.wotjd243.ecommerce.order.domain.Order.PayMethod;
-import io.github.wotjd243.ecommerce.order.domain.PayInfo;
-import io.github.wotjd243.ecommerce.order.domain.PayState;
-import io.github.wotjd243.ecommerce.order.domain.ShoppingBasket;
+import io.github.wotjd243.ecommerce.order.domain.*;
 import io.github.wotjd243.ecommerce.order.infra.DummyOrderRepository;
 import io.github.wotjd243.ecommerce.order.infra.DummyShoppingBasketRepository;
 import io.github.wotjd243.ecommerce.user.application.UserService;
@@ -34,7 +33,8 @@ public class OrderServiceTest {
     public void 한개_주문() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         PayMethod method = PayMethod.CARD;
-        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchItems("DDD")));
+        PagingDto paging = new PagingDto(1, 10000, SortParameter.TITLE, SortOrder.ASCENDING);
+        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchItems("DDD", paging)));
 
         OrderResponseDto result = orderService.order(buyer, method);
         assertThat(basket.size()).isEqualTo(1);
@@ -60,7 +60,7 @@ public class OrderServiceTest {
     public void 결제성공플레그_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(buyer, basket);
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.CARD);
 
         assertThat(payInfo.getResult()).isEqualTo(SUCCESS);
     }
@@ -69,7 +69,7 @@ public class OrderServiceTest {
     public void 결제금액변조_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(buyer, basket);
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.PHONE);
 
         assertThat(payInfo.getPayTotal()).isEqualTo(basket.sumPrice());
     }

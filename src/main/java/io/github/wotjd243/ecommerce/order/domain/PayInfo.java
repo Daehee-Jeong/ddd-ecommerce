@@ -13,7 +13,7 @@ public class PayInfo {
     }
 
     public PayState getResult() {
-        return this.payState;
+          return this.payState;
     }
 
     public double getPayTotal() {
