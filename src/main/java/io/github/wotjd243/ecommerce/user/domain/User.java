@@ -2,6 +2,8 @@ package io.github.wotjd243.ecommerce.user.domain;
 
 import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
 
+import java.util.Collections;
+
 public class User {
     private Long id;
     private final String userId;
@@ -12,6 +14,7 @@ public class User {
     public User(String userId, String address) {
         this.userId = userId;
         this.address = address;
+        this.shippingAddresses = new ShippingAddresses(Collections.emptySet());
     }
 
     public UserResponseDto toDto() {
