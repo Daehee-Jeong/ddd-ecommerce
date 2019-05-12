@@ -27,7 +27,11 @@ public class OrderService {
         //TODO: 주문이 완료되기 전에 결재가 진행되어야 한다.
         PayInfo payInfo = new PayInfo(buyer, basket);
 
-        if (isPaySuccess(payInfo, basket)) {
+        if (payInfo.isPayStateSuccess()) {
+            return null;
+        }
+
+        if (isPaySumSame(payInfo, basket)) {
             Order order = new Order(buyer, method, basket);
             return orderRepository.save(order).toDto();
         }
@@ -35,13 +39,13 @@ public class OrderService {
         return null;
     }
 
-    public boolean isPaySuccess(PayInfo payInfo, ShoppingBasket shoppingBasket) {
+    public boolean isPaySumSame(PayInfo payInfo, ShoppingBasket shoppingBasket) {
 
         // 결과값이 성공이고, 결제합이 같아야함
-        if (payInfo.getResult().equals("FAIL") || payInfo.getPayTotal() != shoppingBasket.sumPrice()) {
+        if (payInfo.getPayTotal() != shoppingBasket.sumPrice()) {
             throw new IllegalStateException("결제도중 오류가 발생했습니다");
         }
-        return payInfo.getResult().equals("SUCCESS") && payInfo.getPayTotal() == shoppingBasket.sumPrice();
+        return payInfo.getPayTotal() == shoppingBasket.sumPrice();
     }
 
 

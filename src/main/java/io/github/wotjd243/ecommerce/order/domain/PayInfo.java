@@ -17,4 +17,13 @@ public class PayInfo {
     public double getPayTotal() {
         return this.basket.sumPrice();
     }
+
+    public boolean isPayStateSuccess() {
+
+        // 결과값이 성공이고, 결제합이 같아야함
+        if (this.getResult().equals(payState.FAIL)) {
+            throw new IllegalStateException("결제도중 오류가 발생했습니다");
+        }
+        return this.getResult().equals(payState.SUCCESS);
+    }
 }
