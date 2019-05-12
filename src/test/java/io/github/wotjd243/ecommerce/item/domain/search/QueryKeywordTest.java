@@ -21,10 +21,10 @@ public class QueryKeywordTest {
     @Test
     public void 검색어_매치_확인() {
         // given
-        QueryKeyword queryKeyword = new QueryKeyword("다함께 DDD");
+        QueryKeyword queryKeyword = new QueryKeyword("다함께");
 
         // when
-        boolean shouldBeTrue = queryKeyword.match("다함께");
+        boolean shouldBeTrue = queryKeyword.match("다함께 DDD");
 
         // then
         assertThat(shouldBeTrue).isTrue();
