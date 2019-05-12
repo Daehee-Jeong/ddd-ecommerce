@@ -1,6 +1,5 @@
 package io.github.wotjd243.ecommerce.item.domain;
 
-import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.domain.exception.HasNotPermissionException;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 
@@ -55,16 +54,12 @@ public class Item {
         return this;
     }
 
-    public ItemResponseDto toDto() {
-        return new ItemResponseDto(detail.getTitle(), detail.getPrice(), detail.getGalleryUrl(), getStock(), itemState.name());
-    }
-
     public Item sold(int numberOfSoldItem) {
         if (!isSelling()) {
             throw new IllegalStateException("This item is not selling now");
         }
 
-        this.stock.decrease(numberOfSoldItem);
+        this.stock = this.stock.decrease(numberOfSoldItem);
 
         if (this.stock.isOutOfStock()) {
             this.itemState = ItemState.SOLD_OUT;
@@ -89,11 +84,15 @@ public class Item {
         return detail.getPrice();
     }
 
-    int getStock() {
+    public String getFalleryUrl() {
+        return this.detail.getGalleryUrl();
+    }
+
+    public int getStock() {
         return stock.getValue();
     }
 
-    ItemState getItemState() {
+    public ItemState getItemState() {
         return itemState;
     }
 

@@ -22,21 +22,21 @@ public class ItemService {
     public List<ItemResponseDto> searchAll() {
         List<Item> items = itemRepository.findAll();
         return items.stream()
-                .map(Item::toDto)
+                .map(this::itemToReponseDto)
                 .collect(Collectors.toList());
     }
 
     public List<ItemResponseDto> searchAll(PagingDto paging) {
         List<Item> items = itemRepository.findAll(paging);
         return items.stream()
-                .map(Item::toDto)
+                .map(this::itemToReponseDto)
                 .collect(Collectors.toList());
     }
 
     public List<ItemResponseDto> searchItems(String keyword, PagingDto paging) {
         List<Item> items = itemRepository.findByQueryKeyword(new QueryKeyword(keyword), paging);
         return items.stream()
-                .map(Item::toDto)
+                .map(this::itemToReponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -44,9 +44,9 @@ public class ItemService {
         userService.checkValid(seller.getUserId());
 
         ItemDetail detail = new ItemDetail(itemDto.getTitle(), itemDto.getPrice(), itemDto.getUrl());
-        return itemRepository
-                .save(new Item(seller.getUserId(), new Stock(stock), detail))
-                .toDto();
+        Item item = itemRepository
+                .save(new Item(seller.getUserId(), new Stock(stock), detail));
+        return itemToReponseDto(item);
     }
 
     public List<ItemResponseDto> findItemsOwned(Seller seller) {
@@ -54,12 +54,13 @@ public class ItemService {
 
         List<Item> items = itemRepository.findByUserId(seller.getUserId());
         return items.stream()
-                .map(Item::toDto)
+                .map(this::itemToReponseDto)
                 .collect(Collectors.toList());
     }
 
     public ItemResponseDto findItem(long itemId) {
-        return itemRepository.findById(itemId).toDto();
+        Item item = itemRepository.findById(itemId);
+        return itemToReponseDto(item);
     }
 
     // TODO Sales service에서 관리
@@ -72,4 +73,8 @@ public class ItemService {
 //        Item item = itemRepository.findById(itemId);
 //        return item.sold(numberOfSoldItems).toDto();
 //    }
+
+    private ItemResponseDto itemToReponseDto(Item item) {
+        return new ItemResponseDto(item.getTitle(), item.getPrice(), item.getFalleryUrl(), item.getStock(), item.getItemState().name());
+    }
 }
