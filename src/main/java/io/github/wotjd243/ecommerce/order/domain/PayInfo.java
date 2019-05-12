@@ -6,10 +6,11 @@ public class PayInfo {
     private PayState payState;
     private PayMethod payMethod;
 
-    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod) {
+    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod, PayState payState) {
         this.buyer = buyer;
         this.basket = basket;
         this.payMethod = payMethod;
+        this.payState = payState;
     }
 
     public PayState getResult() {
@@ -23,9 +24,11 @@ public class PayInfo {
     public boolean isPayStateSuccess() {
 
         // 결과값이 성공이고, 결제합이 같아야함
-        if (this.getResult().equals(payState.FAIL)) {
+        if (PayState.FAIL.equals(getResult())) {
             throw new IllegalStateException("결제도중 오류가 발생했습니다");
         }
-        return this.getResult().equals(payState.SUCCESS);
+
+        return PayState.SUCCESS.equals(getResult());
+        //return this.getResult().equals(PayState.SUCCESS);
     }
 }

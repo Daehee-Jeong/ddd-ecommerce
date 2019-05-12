@@ -25,7 +25,7 @@ public class OrderService {
         ShoppingBasket basket = shoppingBasketService.findByBuyer(buyer.getUserId());
 
         //TODO: 주문이 완료되기 전에 결재가 진행되어야 한다.
-        PayInfo payInfo = new PayInfo(buyer, basket, method);
+        PayInfo payInfo = new PayInfo(buyer, basket, method, PayState.SUCCESS);
 
         if (payInfo.isPayStateSuccess()) {
             return null;
@@ -39,7 +39,7 @@ public class OrderService {
         return null;
     }
 
-    public boolean isPaySumSame(PayInfo payInfo, ShoppingBasket shoppingBasket) {
+    private boolean isPaySumSame(PayInfo payInfo, ShoppingBasket shoppingBasket) {
 
         // 결과값이 성공이고, 결제합이 같아야함
         if (payInfo.getPayTotal() != shoppingBasket.sumPrice()) {
