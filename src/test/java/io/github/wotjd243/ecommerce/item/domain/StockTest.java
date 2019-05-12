@@ -19,10 +19,10 @@ public class StockTest {
         Stock stock = new Stock(2);
 
         // when
-        stock.decrease(2);
+        Stock decreasedStock = stock.decrease(2);
 
         // then
-        assertThat(stock.getValue()).isEqualTo(0);
+        assertThat(decreasedStock.getValue()).isEqualTo(0);
     }
 
     @Test

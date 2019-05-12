@@ -20,8 +20,7 @@ public class Stock {
     Stock decrease(int numberOfDecrement) {
         validateStock(numberOfDecrement);
 
-        this.value -= numberOfDecrement;
-        return this;
+        return new Stock(this.value - numberOfDecrement);
     }
 
     boolean isOutOfStock() {
