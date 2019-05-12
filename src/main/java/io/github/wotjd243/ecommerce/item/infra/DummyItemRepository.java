@@ -1,6 +1,5 @@
 package io.github.wotjd243.ecommerce.item.infra;
 
-import io.github.wotjd243.ecommerce.item.application.dto.PagingDto;
 import io.github.wotjd243.ecommerce.item.domain.Item;
 import io.github.wotjd243.ecommerce.item.domain.ItemDetail;
 import io.github.wotjd243.ecommerce.item.domain.ItemRepository;
@@ -62,24 +61,20 @@ public class DummyItemRepository implements ItemRepository {
     }
 
     @Override
-    public List<Item> findAll(PagingDto paging) {
-        Sort sort = paging.getSort();
+    public List<Item> findAll(Page page, Sort sort) {
         List<Item> sortedItems = sort.sortItems(new ArrayList<>(items));
 
-        Page page = paging.getPage();
         return page.getPageElements(sortedItems);
     }
 
     @Override
-    public List<Item> findByQueryKeyword(QueryKeyword queryKeyword, PagingDto paging) {
+    public List<Item> findByQueryKeyword(QueryKeyword queryKeyword, Page page, Sort sort) {
         List<Item> filteredItems = items.stream()
                 .filter(item -> item.isKeywordMatched(queryKeyword))
                 .collect(Collectors.toList());
 
-        Sort sort = paging.getSort();
         List<Item> sortedItems = sort.sortItems(filteredItems);
 
-        Page page = paging.getPage();
         return page.getPageElements(sortedItems);
     }
 

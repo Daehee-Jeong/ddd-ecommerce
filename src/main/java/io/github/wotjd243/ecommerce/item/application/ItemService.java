@@ -27,14 +27,14 @@ public class ItemService {
     }
 
     public List<ItemResponseDto> searchAll(PagingDto paging) {
-        List<Item> items = itemRepository.findAll(paging);
+        List<Item> items = itemRepository.findAll(paging.getPage(), paging.getSort());
         return items.stream()
                 .map(this::itemToReponseDto)
                 .collect(Collectors.toList());
     }
 
     public List<ItemResponseDto> searchItems(String keyword, PagingDto paging) {
-        List<Item> items = itemRepository.findByQueryKeyword(new QueryKeyword(keyword), paging);
+        List<Item> items = itemRepository.findByQueryKeyword(new QueryKeyword(keyword), paging.getPage(), paging.getSort());
         return items.stream()
                 .map(this::itemToReponseDto)
                 .collect(Collectors.toList());
