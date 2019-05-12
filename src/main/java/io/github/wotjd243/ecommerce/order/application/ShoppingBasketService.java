@@ -11,18 +11,11 @@ import java.util.List;
 public class ShoppingBasketService {
     private ShoppingBasketRepository shoppingBasketRepository;
 
-    public ShoppingBasketService(ShoppingBasketRepository shoppingBasketRepository, ShoppingBasketService shoppingBasketService) {
+    public ShoppingBasketService(ShoppingBasketRepository shoppingBasketRepository) {
         this.shoppingBasketRepository = shoppingBasketRepository;
     }
 
-    public ShoppingBasket saveShoppingBasket(Buyer buyer, ShoppingBasketDto shoppingBasketDto) {
-        ShoppingBasket shoppingBasket = new ShoppingBasket(shoppingBasketDto.getConsideringItems());
-        return shoppingBasketRepository.save(shoppingBasket);
+    public ShoppingBasket findByBuyer(String userId) {
+        return shoppingBasketRepository.findByBuyer(userId);
     }
-
-
-    public ShoppingBasket findBasketItem(String basketId) {
-        return shoppingBasketRepository.findById(basketId);
-    }
-
 }

@@ -10,11 +10,17 @@ public class ShoppingBasket {
     private final List<ConsideringItem> items;
     private String id;
     private LocalDateTime createdDate;
-    private Buyer buyer;
+    private String buyerId;
 
     public ShoppingBasket(List<ConsideringItem> items) {
         this.id = UUID.randomUUID().toString();
         this.items = items;
+    }
+
+    public ShoppingBasket(List<ConsideringItem> items, String buyerId) {
+        this.id = UUID.randomUUID().toString();
+        this.items = items;
+        this.buyerId = buyerId;
     }
 
     public double sumPrice() {

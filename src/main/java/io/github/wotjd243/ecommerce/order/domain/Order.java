@@ -37,8 +37,4 @@ public class Order {
         return this.id == orderId;
     }
 
-    public enum PayMethod {
-        CARD,
-        PHONE
-    }
 }

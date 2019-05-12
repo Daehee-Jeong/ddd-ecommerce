@@ -4,10 +4,12 @@ public class PayInfo {
     private Buyer buyer;
     private ShoppingBasket basket;
     private PayState payState;
+    private PayMethod payMethod;
 
-    public PayInfo(Buyer buyer, ShoppingBasket basket) {
+    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod) {
         this.buyer = buyer;
         this.basket = basket;
+        this.payMethod = payMethod;
     }
 
     public PayState getResult() {
