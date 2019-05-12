@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class ZipCode {
     private final String code;
+    private final Pattern postalCodePattern = Pattern.compile("\\d{5}");
 
     private ZipCode(String code) {
         if (isInvalid(code)) {
@@ -23,7 +24,7 @@ public class ZipCode {
         if (StringUtils.isBlank(code)) {
             return true;
         }
-        if (!PatternEnum.POSTALCODE.toPattern()
+        if (!postalCodePattern
                 .matcher(code)
                 .find()
         ) {
@@ -47,20 +48,5 @@ public class ZipCode {
     @Override
     public int hashCode() {
         return Objects.hash(code);
-    }
-
-    public enum PatternEnum {
-
-        POSTALCODE("\\d{5}");
-
-        private final String regex;
-
-        private PatternEnum(final String regex) {
-            this.regex = regex;
-        }
-
-        public Pattern toPattern() {
-            return Pattern.compile(regex);
-        }
     }
 }
