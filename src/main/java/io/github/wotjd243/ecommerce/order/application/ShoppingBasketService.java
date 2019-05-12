@@ -20,10 +20,6 @@ public class ShoppingBasketService {
         return shoppingBasketRepository.save(shoppingBasket);
     }
 
-//    public List<ShoppingBasket> findBasketList(Buyer buyer) {
-//        List<ShoppingBasket> shoppingBasketList = shoppingBasketRepository.findByBuyer(buyer);
-//
-//    }
 
     public ShoppingBasket findBasketItem(String basketId) {
         return shoppingBasketRepository.findById(basketId);
