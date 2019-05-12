@@ -63,16 +63,21 @@ public class ItemService {
         return itemToReponseDto(item);
     }
 
-    // TODO Sales service에서 관리
-//    public ItemResponseDto startSelling(Seller seller, Long itemId) {
-//        Item item = itemRepository.findById(itemId);
-//        return item.startSelling(seller.getUserId()).toDto();
-//    }
-//
-//    public ItemResponseDto sold(Long itemId, int numberOfSoldItems) {
-//        Item item = itemRepository.findById(itemId);
-//        return item.sold(numberOfSoldItems).toDto();
-//    }
+    public ItemResponseDto startSelling(Seller seller, Long itemId) {
+        userService.checkValid(seller.getUserId());
+
+        Item item = itemRepository.findById(itemId);
+        item.startSelling();
+
+        return itemToReponseDto(item);
+    }
+
+    public ItemResponseDto sold(Long itemId, int numberOfSoldItems) {
+        Item item = itemRepository.findById(itemId);
+        item.sold(numberOfSoldItems);
+
+        return itemToReponseDto(item);
+    }
 
     private ItemResponseDto itemToReponseDto(Item item) {
         return new ItemResponseDto(item.getTitle(), item.getPrice(), item.getFalleryUrl(), item.getStock(), item.getItemState().name());

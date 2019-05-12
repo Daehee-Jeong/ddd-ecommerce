@@ -1,10 +1,10 @@
 package io.github.wotjd243.ecommerce.item.domain;
 
-import io.github.wotjd243.ecommerce.item.domain.exception.HasNotPermissionException;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
 
 public class ItemTest {
 
@@ -76,22 +76,10 @@ public class ItemTest {
         Item item = newItem("dummy_item", 2, ItemState.BEFORE_SELLING);
 
         // when
-        item.startSelling(sellerId);
+        item.startSelling();
 
         // then
         assertThat(item.isSelling()).isTrue();
-    }
-
-    @Test
-    public void 판매_시작_다른_seller일_경우_HasNotPermissionException() {
-        // given
-        String fakeSellerId = "Fake_seller";
-        Item item = newItem("dummy_item", 2, ItemState.BEFORE_SELLING);
-
-        // when
-        // then
-        assertThatExceptionOfType(HasNotPermissionException.class)
-                .isThrownBy(() -> item.startSelling(fakeSellerId));
     }
 
     public static Item newItem(String title, int stock, ItemState itemState) {

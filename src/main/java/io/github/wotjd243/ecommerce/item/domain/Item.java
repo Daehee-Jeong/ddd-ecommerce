@@ -1,6 +1,5 @@
 package io.github.wotjd243.ecommerce.item.domain;
 
-import io.github.wotjd243.ecommerce.item.domain.exception.HasNotPermissionException;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 
 public class Item {
@@ -41,20 +40,15 @@ public class Item {
         return this.itemState.isSelling();
     }
 
-    public Item startSelling(String sellerId) {
-        if (!checkOwner(sellerId)) {
-            throw new HasNotPermissionException("해당 물품에 대한 권한이 없습니다.");
-        }
-
+    public void startSelling() {
         if (isSelling()) {
             throw new IllegalStateException("It's already selling");
         }
 
         this.itemState = ItemState.SELLING;
-        return this;
     }
 
-    public Item sold(int numberOfSoldItem) {
+    public void sold(int numberOfSoldItem) {
         if (!isSelling()) {
             throw new IllegalStateException("This item is not selling now");
         }
@@ -64,8 +58,6 @@ public class Item {
         if (this.stock.isOutOfStock()) {
             this.itemState = ItemState.SOLD_OUT;
         }
-
-        return this;
     }
 
     public Long getId() {
