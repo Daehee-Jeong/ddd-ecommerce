@@ -2,6 +2,7 @@ package io.github.wotjd243.ecommerce.order.application;
 
 import io.github.wotjd243.ecommerce.order.application.dto.OrderResponseDto;
 import io.github.wotjd243.ecommerce.order.domain.*;
+import io.github.wotjd243.ecommerce.order.domain.exception.NotValidPayException;
 import io.github.wotjd243.ecommerce.user.application.UserService;
 
 import java.util.List;
@@ -18,22 +19,22 @@ public class OrderService {
         this.shoppingBasketService = shoppingBasketService;
     }
 
-    public OrderResponseDto order(Buyer buyer, PayMethod method) {
+    public OrderResponseDto order(Buyer buyer, PayMethod method, Double sumPrice) {
         userService.checkValid(buyer.getUserId());
         ShoppingBasket basket = shoppingBasketService.findByBuyer(buyer.getUserId());
 
-        PayInfo payInfo = new PayInfo(buyer, basket, method);
+        PayInfo payInfo = new PayInfo(buyer, basket, method, sumPrice);
 
         if (!payInfo.isPayStateSuccess()) {
-            return null;
+            throw new NotValidPayException("정상적인 결제가 이루어지지않았습니다");
         }
 
-        if (payInfo.isPaySumSame(payInfo, basket)) {
-            Order order = new Order(buyer, method, basket);
-            return orderRepository.save(order).toDto();
+        if (!payInfo.isPaySumSame()) {
+            throw new NotValidPayException("정상적인 결제가 이루어지지않았습니다");
         }
 
-        return null;
+        Order order = new Order(buyer, method, basket);
+        return orderRepository.save(order).toDto();
     }
 
 

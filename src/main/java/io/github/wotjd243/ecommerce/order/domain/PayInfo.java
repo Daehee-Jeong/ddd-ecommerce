@@ -5,38 +5,25 @@ public class PayInfo {
     private ShoppingBasket basket;
     private PayState payState;
     private PayMethod payMethod;
+    private Double sumPrice;
 
-    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod) {
+    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod, Double sumPrice) {
         this.buyer = buyer;
         this.basket = basket;
         this.payMethod = payMethod;
         this.payState = payState.SUCCESS;
+        this.sumPrice = sumPrice;
     }
 
     public PayState getResult() {
           return this.payState;
     }
 
-    public double getPayTotal() {
-        return this.basket.sumPrice();
-    }
-
     public boolean isPayStateSuccess() {
-
-        // 결과값이 성공이고, 결제합이 같아야함
-        if (PayState.FAIL.equals(getResult())) {
-            return false;
-        }
-
         return PayState.SUCCESS.equals(getResult());
     }
 
-    public boolean isPaySumSame(PayInfo payInfo, ShoppingBasket shoppingBasket) {
-
-        // 결과값이 성공이고, 결제합이 같아야함
-        if (payInfo.getPayTotal() != shoppingBasket.sumPrice()) {
-            return false;
-        }
-        return payInfo.getPayTotal() == shoppingBasket.sumPrice();
+    public boolean isPaySumSame() {
+        return this.sumPrice == this.basket.sumPrice();
     }
 }

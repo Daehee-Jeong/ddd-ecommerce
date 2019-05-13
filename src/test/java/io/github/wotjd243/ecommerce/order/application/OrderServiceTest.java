@@ -36,7 +36,7 @@ public class OrderServiceTest {
         PagingDto paging = new PagingDto(1, 10000, SortParameter.TITLE, SortOrder.ASCENDING);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchItems("DDD", paging)));
 
-        OrderResponseDto result = orderService.order(buyer, method);
+        OrderResponseDto result = orderService.order(buyer, method, basket.sumPrice());
         assertThat(basket.size()).isEqualTo(1);
 
         OrderResponseDto order = orderService.findOrder(result.getOrderId());
@@ -49,7 +49,7 @@ public class OrderServiceTest {
         PayMethod method = PayMethod.CARD;
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
 
-        OrderResponseDto result = orderService.order(buyer, method);
+        OrderResponseDto result = orderService.order(buyer, method, basket.sumPrice());
         List<OrderResponseDto> orders = orderService.findOrders(buyer);
 
         assertThat(basket.size()).isEqualTo(4);
@@ -60,7 +60,7 @@ public class OrderServiceTest {
     public void 결제성공플레그_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.CARD);
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.CARD, basket.sumPrice());
 
         assertThat(payInfo.isPayStateSuccess()).isTrue();
     }
@@ -69,8 +69,17 @@ public class OrderServiceTest {
     public void 결제금액변조_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.PHONE);
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.PHONE, basket.sumPrice());
 
-        assertThat(payInfo.isPaySumSame(payInfo, basket)).isTrue();
+        assertThat(payInfo.isPaySumSame()).isTrue();
+    }
+
+    @Test
+    public void 결제금액실패_테스트() {
+        Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
+        ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.PHONE, 500.0);
+
+        assertThat(payInfo.isPaySumSame()).isFalse();
     }
 }
