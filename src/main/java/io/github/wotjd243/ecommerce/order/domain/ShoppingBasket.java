@@ -9,7 +9,6 @@ public class ShoppingBasket {
     public static final String PRICE_FORMAT_PATTERN = "%.2f";
     private final List<ConsideringItem> items;
     private String id;
-    private LocalDateTime createdDate;
 
     public ShoppingBasket(List<ConsideringItem> items) {
         this.id = UUID.randomUUID().toString();

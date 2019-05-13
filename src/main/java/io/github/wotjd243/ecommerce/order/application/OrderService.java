@@ -18,34 +18,22 @@ public class OrderService {
         this.shoppingBasketService = shoppingBasketService;
     }
 
-    //TODO: 장바구니에 담기 기능이 구현되어야 한다.
-
     public OrderResponseDto order(Buyer buyer, PayMethod method) {
         userService.checkValid(buyer.getUserId());
         ShoppingBasket basket = shoppingBasketService.findByBuyer(buyer.getUserId());
 
-        //TODO: 주문이 완료되기 전에 결재가 진행되어야 한다.
-        PayInfo payInfo = new PayInfo(buyer, basket, method, PayState.SUCCESS);
+        PayInfo payInfo = new PayInfo(buyer, basket, method);
 
-        if (payInfo.isPayStateSuccess()) {
+        if (!payInfo.isPayStateSuccess()) {
             return null;
         }
 
-        if (isPaySumSame(payInfo, basket)) {
+        if (payInfo.isPaySumSame(payInfo, basket)) {
             Order order = new Order(buyer, method, basket);
             return orderRepository.save(order).toDto();
         }
 
         return null;
-    }
-
-    private boolean isPaySumSame(PayInfo payInfo, ShoppingBasket shoppingBasket) {
-
-        // 결과값이 성공이고, 결제합이 같아야함
-        if (payInfo.getPayTotal() != shoppingBasket.sumPrice()) {
-            throw new IllegalStateException("결제도중 오류가 발생했습니다");
-        }
-        return payInfo.getPayTotal() == shoppingBasket.sumPrice();
     }
 
 

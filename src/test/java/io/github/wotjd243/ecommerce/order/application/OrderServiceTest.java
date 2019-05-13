@@ -60,7 +60,7 @@ public class OrderServiceTest {
     public void 결제성공플레그_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.CARD, SUCCESS);
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.CARD);
 
         assertThat(payInfo.isPayStateSuccess()).isTrue();
     }
@@ -69,8 +69,8 @@ public class OrderServiceTest {
     public void 결제금액변조_테스트() {
         Buyer buyer = new Buyer(TEST_USER_ID, TEST_USER_ADDRESS);
         ShoppingBasket basket = new ShoppingBasket(BasketUtils.consider(itemService.searchAll()));
-        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.PHONE, SUCCESS);
+        PayInfo payInfo = new PayInfo(buyer, basket, PayMethod.PHONE);
 
-        assertThat(payInfo.getPayTotal()).isEqualTo(basket.sumPrice());
+        assertThat(payInfo.isPaySumSame(payInfo, basket)).isTrue();
     }
 }

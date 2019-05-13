@@ -6,11 +6,11 @@ public class PayInfo {
     private PayState payState;
     private PayMethod payMethod;
 
-    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod, PayState payState) {
+    public PayInfo(Buyer buyer, ShoppingBasket basket, PayMethod payMethod) {
         this.buyer = buyer;
         this.basket = basket;
         this.payMethod = payMethod;
-        this.payState = payState;
+        this.payState = payState.SUCCESS;
     }
 
     public PayState getResult() {
@@ -25,10 +25,18 @@ public class PayInfo {
 
         // 결과값이 성공이고, 결제합이 같아야함
         if (PayState.FAIL.equals(getResult())) {
-            throw new IllegalStateException("결제도중 오류가 발생했습니다");
+            return false;
         }
 
         return PayState.SUCCESS.equals(getResult());
-        //return this.getResult().equals(PayState.SUCCESS);
+    }
+
+    public boolean isPaySumSame(PayInfo payInfo, ShoppingBasket shoppingBasket) {
+
+        // 결과값이 성공이고, 결제합이 같아야함
+        if (payInfo.getPayTotal() != shoppingBasket.sumPrice()) {
+            return false;
+        }
+        return payInfo.getPayTotal() == shoppingBasket.sumPrice();
     }
 }
