@@ -2,10 +2,12 @@ package io.github.wotjd243.ecommerce.order.infra;
 
 import io.github.wotjd243.ecommerce.order.domain.ShoppingBasket;
 import io.github.wotjd243.ecommerce.order.domain.ShoppingBasketRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class DummyShoppingBasketRepository implements ShoppingBasketRepository {
 
     private List<ShoppingBasket> basketList = new ArrayList<>();

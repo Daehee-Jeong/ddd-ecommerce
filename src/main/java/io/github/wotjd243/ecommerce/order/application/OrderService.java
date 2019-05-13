@@ -4,10 +4,12 @@ import io.github.wotjd243.ecommerce.order.application.dto.OrderResponseDto;
 import io.github.wotjd243.ecommerce.order.domain.*;
 import io.github.wotjd243.ecommerce.order.domain.exception.NotValidPayException;
 import io.github.wotjd243.ecommerce.user.application.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class OrderService {
     private final OrderRepository orderRepository;
     private final UserService userService;

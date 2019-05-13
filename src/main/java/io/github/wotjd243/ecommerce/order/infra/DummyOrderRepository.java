@@ -3,11 +3,13 @@ package io.github.wotjd243.ecommerce.order.infra;
 import io.github.wotjd243.ecommerce.order.domain.Buyer;
 import io.github.wotjd243.ecommerce.order.domain.Order;
 import io.github.wotjd243.ecommerce.order.domain.OrderRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Repository
 public class DummyOrderRepository implements OrderRepository {
     private static List<Order> orders = new ArrayList<>();
 
