@@ -9,9 +9,7 @@ public class ShoppingBasket {
     private List<ConsideringItem> consideringItems;
 
     public ConsideringItem addConsideringItem(ConsideringItem consideringItem) {
-        if (!consideringItems.add(consideringItem)) {
-            throw new IllegalArgumentException();
-        }
+        consideringItems.add(consideringItem);
         return consideringItem;
     }
 
