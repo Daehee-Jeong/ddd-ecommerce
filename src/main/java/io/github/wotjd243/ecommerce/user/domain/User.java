@@ -11,6 +11,8 @@ public class User {
 
     private ShippingAddresses shippingAddresses;
 
+    private ShoppingBasket shoppingBasket;
+
     public User(String userId, String address) {
         this.userId = userId;
         this.address = address;
@@ -27,5 +29,13 @@ public class User {
 
     public ShippingAddress addShippingAddress(String address, String zipCode) {
         return shippingAddresses.add(new ShippingAddress(address, zipCode));
+    }
+
+    public ConsideringItem addConsideringItem(ConsideringItem consideringItem) {
+        return shoppingBasket.addConsideringItem(consideringItem);
+    }
+
+    public boolean removeConsideringItem(ConsideringItem consideringItem) {
+        return shoppingBasket.removeConsideringItem(consideringItem);
     }
 }
