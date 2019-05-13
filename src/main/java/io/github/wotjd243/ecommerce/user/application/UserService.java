@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public User findByUserId(String userId) {
-        return userRepository.findByUserId(userId).orElseThrow(IllegalArgumentException::new);
+        return userRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException("No user found with id: " +userId));
     }
 
     public List<UserResponseDto> findAll() {
