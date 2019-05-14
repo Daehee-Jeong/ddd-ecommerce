@@ -2,11 +2,13 @@ package io.github.wotjd243.ecommerce.user.infra;
 
 import io.github.wotjd243.ecommerce.user.domain.User;
 import io.github.wotjd243.ecommerce.user.domain.UserRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class DummyUserRepository implements UserRepository {
     private final static String TEST_USER_ID = "TEST_USER";
     private final static String TEST_USER_ADDRESS = "서울시";
