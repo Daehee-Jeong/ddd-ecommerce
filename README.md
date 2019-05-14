@@ -67,7 +67,7 @@
 | 주문 ID | OrderId | 주문의 고유 식별자 |
 | 주문 물품 | OrderItem | 사용자가 주문한 물품 |
 | 주문 상태 | OrderState | 주문 현재 상태를 나타낸다 : 결제 완료(PAY_DONE), 배송 전(BEFORE_DELIVERY), 배송 중(DELIVERING), 배송 완료(DELIVERY_DONE), 구매 완료(ORDER_DONE) |
-| 배달 | Delivery | 판매자가 구매자가 구매한 물품들을 배송지로 보내는 것 |
+| 배송 | Delivery | 판매자가 구매자가 구매한 물품들을 배송지로 보내는 것 |
 | 결제 | Pay | 주문 시 물품의 값을 지불하는 것 |
 | 결제 수단 | PayMethod | 결제를 위한 수단 : 카드(card), 휴대전화(phone) |
 
