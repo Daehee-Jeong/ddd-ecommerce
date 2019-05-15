@@ -5,10 +5,12 @@ import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
 import io.github.wotjd243.ecommerce.user.domain.User;
 import io.github.wotjd243.ecommerce.user.domain.UserRepository;
 import io.github.wotjd243.ecommerce.user.domain.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService {
     private final UserRepository userRepository;
 
@@ -35,8 +37,10 @@ public class UserService {
         }
     }
 
-    public User findByUserId(String userId) {
-        return userRepository.findByUserId(userId).orElseThrow(() -> new ResourceNotFoundException("No user found with id: " +userId));
+    public UserResponseDto findByUserId(String userId) {
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("No user found with id: " +userId))
+                .toDto();
     }
 
     public List<UserResponseDto> findAll() {
