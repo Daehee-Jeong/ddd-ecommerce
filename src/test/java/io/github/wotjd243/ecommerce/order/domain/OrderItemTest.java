@@ -8,7 +8,7 @@ import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConsideringItemTest {
+public class OrderItemTest {
 
     @Test
     public void 고려중인_상품의_금액() throws MalformedURLException {
@@ -16,9 +16,9 @@ public class ConsideringItemTest {
         Dollar unitPrice = new Dollar(100.0);
         int quantity = 2;
         URL galleryUrl = new URL("http://www.naver.com");
-        ConsideringItem consideringItem = new ConsideringItem(itemTitle, unitPrice, galleryUrl, quantity);
+        OrderItem orderItem = new OrderItem(itemTitle, unitPrice, galleryUrl, quantity);
 
-        double price = consideringItem.sum();
+        double price = orderItem.sum();
         assertThat(price).isEqualTo(200.0);
     }
 }

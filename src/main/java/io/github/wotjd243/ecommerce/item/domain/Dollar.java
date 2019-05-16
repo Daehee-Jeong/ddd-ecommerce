@@ -1,5 +1,9 @@
 package io.github.wotjd243.ecommerce.item.domain;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Dollar {
     private double price;
 
