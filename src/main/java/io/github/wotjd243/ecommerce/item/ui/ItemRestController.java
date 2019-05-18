@@ -1,14 +1,12 @@
 package io.github.wotjd243.ecommerce.item.ui;
 
 import io.github.wotjd243.ecommerce.item.application.ItemService;
+import io.github.wotjd243.ecommerce.item.application.dto.ItemRequestDto;
 import io.github.wotjd243.ecommerce.item.application.dto.ItemResponseDto;
 import io.github.wotjd243.ecommerce.item.application.dto.PagingDto;
 import io.github.wotjd243.ecommerce.item.domain.Seller;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +36,10 @@ public class ItemRestController {
     @GetMapping("/users/{userId}")
     public List<ItemResponseDto> getItemsOwned(@PathVariable String userId) {
         return this.itemService.findItemsOwned(new Seller(userId));
+    }
+
+    @PostMapping
+    public ItemResponseDto registerItem(String userId, ItemRequestDto itemRequest) {
+        return this.itemService.register(new Seller(userId), itemRequest);
     }
 }
