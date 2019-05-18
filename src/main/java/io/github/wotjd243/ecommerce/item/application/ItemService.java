@@ -6,10 +6,12 @@ import io.github.wotjd243.ecommerce.item.application.dto.PagingDto;
 import io.github.wotjd243.ecommerce.item.domain.*;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 import io.github.wotjd243.ecommerce.user.application.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ItemService {
     private final ItemRepository itemRepository;
     private final UserService userService;

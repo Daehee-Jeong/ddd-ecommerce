@@ -8,12 +8,14 @@ import io.github.wotjd243.ecommerce.item.domain.search.Page;
 import io.github.wotjd243.ecommerce.item.domain.search.QueryKeyword;
 import io.github.wotjd243.ecommerce.item.domain.search.Sort;
 import io.github.wotjd243.ecommerce.user.infra.DummyUserRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+@Repository
 public class DummyItemRepository implements ItemRepository {
     private static String user = DummyUserRepository.getTestUserId();
     private static List<Item> items = new ArrayList<>();
