@@ -42,12 +42,13 @@ public class ItemService {
                 .collect(Collectors.toList());
     }
 
-    public ItemResponseDto register(Seller seller, ItemRequestDto itemDto, int stock) {
+    public ItemResponseDto register(Seller seller, ItemRequestDto itemDto) {
         userService.checkValid(seller.getUserId());
 
         ItemDetail detail = new ItemDetail(itemDto.getTitle(), itemDto.getPrice(), itemDto.getUrl());
-        Item item = itemRepository
-                .save(new Item(seller.getUserId(), new Stock(stock), detail));
+        Stock stock = new Stock(itemDto.getStock());
+        Item item = itemRepository.save(new Item(seller.getUserId(), stock, detail));
+
         return itemToReponseDto(item);
     }
 
