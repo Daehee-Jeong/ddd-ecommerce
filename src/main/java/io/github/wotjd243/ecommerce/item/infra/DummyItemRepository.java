@@ -47,13 +47,16 @@ public class DummyItemRepository implements ItemRepository {
 
     @Override
     public Item findById(Long itemId) {
-        return items.stream().filter(v -> v.getId() == itemId).findFirst().get();
+        return items.stream()
+                .filter(item -> item.getId() == itemId)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Can't find an item with the id (%d)", itemId)));
     }
 
     @Override
     public List<Item> findByUserId(String userId) {
         return items.stream()
-                .filter(v -> v.getSellerId() == userId)
+                .filter(item -> item.isOwner(userId))
                 .collect(Collectors.toList());
     }
 
