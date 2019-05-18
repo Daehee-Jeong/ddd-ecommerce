@@ -1,7 +1,5 @@
 package io.github.wotjd243.ecommerce.user.domain;
 
-import io.github.wotjd243.ecommerce.user.application.dto.UserResponseDto;
-
 import java.util.Collections;
 
 public class User {
@@ -18,16 +16,23 @@ public class User {
         this.shippingAddresses = new ShippingAddresses(Collections.emptySet());
     }
 
-    public UserResponseDto toDto() {
-        return new UserResponseDto(userId);
-    }
-
     public boolean match(String userId) {
-        return this.userId == userId;
+        return this.userId.equals(userId);
     }
 
     public ShippingAddress addShippingAddress(String address, String zipCode) {
         return shippingAddresses.add(new ShippingAddress(address, zipCode));
     }
 
+    public ShippingAddresses getShippingAddresses() {
+        return shippingAddresses;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

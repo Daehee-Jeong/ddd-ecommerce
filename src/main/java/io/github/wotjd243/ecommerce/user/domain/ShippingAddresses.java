@@ -16,4 +16,8 @@ public class ShippingAddresses {
         }
         return shippingAddress;
     }
+
+    public Set<ShippingAddress> getShippingAddresses() {
+        return shippingAddresses;
+    }
 }

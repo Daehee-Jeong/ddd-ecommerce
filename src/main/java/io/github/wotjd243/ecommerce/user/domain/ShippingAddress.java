@@ -17,6 +17,14 @@ public class ShippingAddress {
         this.zipcode = ZipCode.codeOf(zipcode);
     }
 
+    public String getAddress() {
+        return this.address;
+    }
+
+    public String getZipCode() {
+        return this.zipcode.getCode();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
