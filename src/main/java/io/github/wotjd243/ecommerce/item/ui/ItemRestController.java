@@ -42,4 +42,9 @@ public class ItemRestController {
     public ItemResponseDto registerItem(String userId, ItemRequestDto itemRequest) {
         return this.itemService.register(new Seller(userId), itemRequest);
     }
+
+    @PutMapping("/{id}")
+    public ItemResponseDto sold(@PathVariable long id, int quantity) {
+        return this.itemService.sold(id, quantity);
+    }
 }
