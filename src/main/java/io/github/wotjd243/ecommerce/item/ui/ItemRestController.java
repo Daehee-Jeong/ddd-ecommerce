@@ -47,4 +47,9 @@ public class ItemRestController {
     public ItemResponseDto sold(@PathVariable long id, int quantity) {
         return this.itemService.sold(id, quantity);
     }
+
+    @PutMapping("/{id}/users/{userId}")
+    public ItemResponseDto startSelling(@PathVariable long id, @PathVariable  String userId) {
+        return this.itemService.startSelling(new Seller(userId), id);
+    }
 }
