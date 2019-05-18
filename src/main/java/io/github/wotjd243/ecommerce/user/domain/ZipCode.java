@@ -2,12 +2,14 @@ package io.github.wotjd243.ecommerce.user.domain;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+@Embeddable
 public class ZipCode {
-    private final String code;
     private final Pattern postalCodePattern = Pattern.compile("\\d{5}");
+    private String code;
 
     private ZipCode(String code) {
         if (isInvalid(code)) {
@@ -35,6 +37,10 @@ public class ZipCode {
 
     public String getCode() {
         return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

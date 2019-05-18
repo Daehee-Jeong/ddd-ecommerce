@@ -1,14 +1,23 @@
 package io.github.wotjd243.ecommerce.user.domain;
 
+import javax.persistence.*;
 import java.util.Collections;
 
+@Entity
 public class User {
 
-    private Long id;
-    private final String userId;
+    @Id
+    private long id;
+
+    private String userId;
+
     private String address;
 
+    @Embedded
     private ShippingAddresses shippingAddresses;
+
+    public User() {
+    }
 
     public User(String userId, String address) {
         this.userId = userId;

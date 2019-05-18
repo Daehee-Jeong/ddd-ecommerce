@@ -34,7 +34,7 @@ public class UserController {
         return UserDto.of(userService.register(userDto));
     }
 
-    @GetMapping(value = "users/{userId}")
+    @GetMapping(value = "users/{userId}/shippingAddresses")
     public List<ShippingAddressDto> findShippingAddresses(@PathVariable String userId) {
         return userService.findShippingAddressesByUserId(userId)
                 .getShippingAddresses().stream().

@@ -2,11 +2,16 @@ package io.github.wotjd243.ecommerce.user.domain;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
+@Embeddable
 public class ShippingAddress {
     private Long id;
     private String address;
+
+    @Embedded
     private ZipCode zipcode;
 
     public ShippingAddress(String address, String zipcode) {
