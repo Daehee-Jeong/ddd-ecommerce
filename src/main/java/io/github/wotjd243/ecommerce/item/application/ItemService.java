@@ -83,6 +83,6 @@ public class ItemService {
     }
 
     private ItemResponseDto itemToReponseDto(Item item) {
-        return new ItemResponseDto(item.getTitle(), item.getPrice(), item.getFalleryUrl(), item.getStock(), item.getItemState().name());
+        return new ItemResponseDto(item.getId(), item.getTitle(), item.getPrice(), item.getFalleryUrl(), item.getStock(), item.getItemState().name());
     }
 }

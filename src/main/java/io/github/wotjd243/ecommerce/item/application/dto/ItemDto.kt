@@ -8,6 +8,7 @@ data class ItemRequestDto(
 )
 
 data class ItemResponseDto(
+        val id: Long,
         val title: String,
         val price: Double,
         val url: String,
