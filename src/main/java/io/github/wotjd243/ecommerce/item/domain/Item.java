@@ -60,6 +60,10 @@ public class Item {
         }
     }
 
+    public boolean isOwner(String userId) {
+        return this.sellerId.equals(userId);
+    }
+
     public Long getId() {
         return id;
     }
@@ -86,9 +90,5 @@ public class Item {
 
     public ItemState getItemState() {
         return itemState;
-    }
-
-    private boolean checkOwner(String sellerId) {
-        return this.sellerId.equals(sellerId);
     }
 }
